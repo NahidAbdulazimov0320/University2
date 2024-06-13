@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Enrollment {
+public class Enrollment extends MainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,9 +27,6 @@ public class Enrollment {
 
 
     private LocalDateTime enrolledTime;
-
-
-
 
 
 }

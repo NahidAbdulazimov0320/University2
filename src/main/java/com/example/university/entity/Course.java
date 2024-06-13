@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Course {
+public class Course  extends MainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -1,5 +1,6 @@
 package com.example.university.entity;
 
+import com.sun.tools.javac.Main;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class University {
+public class University extends MainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

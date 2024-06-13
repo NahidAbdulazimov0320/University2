@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class SectionSchedule {
+public class SectionSchedule  extends MainEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
