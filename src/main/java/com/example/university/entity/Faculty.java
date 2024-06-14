@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Faculty extends MainEntity {
+public class Faculty{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,7 +23,7 @@ public class Faculty extends MainEntity {
     private School school;
 
     @ManyToOne
-    @JoinColumn(name = "university_id")
+    @JoinColumn(name= "university_id")
     private University university;
 
 }

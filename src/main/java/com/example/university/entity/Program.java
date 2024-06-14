@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Program extends MainEntity {
+public class Program {
 
 
     @Id
@@ -28,8 +28,10 @@ public class Program extends MainEntity {
     private List<Student> students;
 
     @ManyToOne
-    @JoinColumn(name = "school_id")
+    @JoinColumn(name ="school_id")
     private School school;
+
+
 
 
 }
