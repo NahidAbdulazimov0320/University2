@@ -6,7 +6,4 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 public interface SchoolRepository extends JpaRepositoryImplementation<School, Long> {
 
 
-
-
-
 }

@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 public interface UniversityRepository extends JpaRepositoryImplementation<University, Long> {
 
 
-
-
 }

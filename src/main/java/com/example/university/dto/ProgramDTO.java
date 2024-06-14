@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class ProgramDTO{
+public class ProgramDTO {
 
     @NotBlank
     private String name;
