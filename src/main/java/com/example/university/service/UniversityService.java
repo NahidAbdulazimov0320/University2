@@ -2,6 +2,7 @@ package com.example.university.service;
 
 import com.example.university.dto.UniversityDTO;
 import com.example.university.exceptions.NoDataFound;
+import com.example.university.exceptions.NoSuchEntityFoundException;
 import com.example.university.mappers.UniversityMapper;
 import com.example.university.repository.UniversityRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,11 +30,13 @@ public class UniversityService {
                 .toList();
     }
 
-    @ResponseStatus(HttpStatus.FOUND)
     public UniversityDTO getById(Long id) {
-        return repository.findById(id)
-                .map(mapper::toDto)
-                .orElseThrow(NoDataFound::new);
+
+            return repository.findById(id)
+                    .map(mapper::toDto)
+                    .orElseThrow(() -> new NoSuchEntityFoundException("There is no entity with this id"));
+
+
     }
 
 

@@ -2,6 +2,7 @@ package com.example.university.service;
 
 import com.example.university.dto.ProgramDTO;
 import com.example.university.exceptions.NoDataFound;
+import com.example.university.exceptions.NoSuchEntityFoundException;
 import com.example.university.mappers.ProgramMapper;
 import com.example.university.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
