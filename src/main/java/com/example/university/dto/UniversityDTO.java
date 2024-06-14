@@ -4,7 +4,6 @@ import com.example.university.entity.Faculty;
 import com.example.university.entity.School;
 import com.example.university.entity.Staff;
 import com.example.university.entity.Student;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UniversityDTO extends MainDTO {
+public class UniversityDTO {
 
     @NotBlank
     private String name;

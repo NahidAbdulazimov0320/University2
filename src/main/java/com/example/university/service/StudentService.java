@@ -2,15 +2,15 @@ package com.example.university.service;
 
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Student;
-import com.example.university.mappers.StudentMapper;
-import com.example.university.repository.StudentRepository;
+import com.example.university.mappers.MainMapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class StudentService extends MainService<StudentRepository, StudentMapper, StudentDTO, Long, Student> {
+public class StudentService extends MainService<StudentDTO, Long, Student> {
 
-    public StudentService(StudentRepository repository, StudentMapper mapper) {
+    public StudentService(JpaRepository<Student, Long> repository, MainMapper<StudentDTO, Student> mapper) {
         super(repository, mapper);
     }
 }

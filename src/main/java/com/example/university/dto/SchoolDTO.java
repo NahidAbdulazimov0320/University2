@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SchoolDTO extends MainDTO{
+public class SchoolDTO {
 
 
    private Long id;

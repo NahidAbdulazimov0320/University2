@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class ProgramDTO extends MainDTO{
+public class ProgramDTO {
 
     @NotBlank
     private String name;

@@ -6,6 +6,7 @@ import com.example.university.mappers.MainMapper;
 import com.example.university.mappers.UniversityMapper;
 import com.example.university.model.validation.ValidUniversity;
 import com.example.university.repository.UniversityRepository;
+import com.example.university.service.MainService;
 import com.example.university.service.UniversityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,20 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/universities")
-
 //TODO
-public class UniversityController extends MainController<UniversityDTO, Long, University, UniversityService>{
-
-
-
-
-
-
-
-
-
-
-
+public class UniversityController extends MainController<UniversityDTO, Long, University>{
+    public UniversityController(MainService<UniversityDTO, Long, University> service) {
+        super(service);
+    }
 }

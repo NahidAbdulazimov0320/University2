@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class EnrollmentDTO extends MainDTO{
+public class EnrollmentDTO {
 
     @Positive
      private Long studentId;
