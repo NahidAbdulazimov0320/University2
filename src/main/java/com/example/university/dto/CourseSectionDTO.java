@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CourseSectionDTO{
+public class CourseSectionDTO extends MainDTO{
 
    @NotNull
    @NotEmpty

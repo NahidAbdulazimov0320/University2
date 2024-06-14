@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Staff {
+public class Staff extends MainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

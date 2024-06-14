@@ -6,13 +6,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface ProgramMapper {
+public interface ProgramMapper extends MainMapper<ProgramDTO, Program> {
 
-    ProgramDTO toDto(Program program);
-    Program DtoTo(ProgramDTO program);
 
-    Program toEntity(ProgramDTO programDTO);
-
-    Program toEntity(@MappingTarget Program program, ProgramDTO programDTO);
 
 }

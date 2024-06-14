@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Program {
+public class Program extends MainEntity{
 
 
     @Id

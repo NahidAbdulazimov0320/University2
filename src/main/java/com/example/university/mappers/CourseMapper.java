@@ -4,10 +4,9 @@ import com.example.university.dto.CourseDTO;
 import com.example.university.entity.Course;
 import org.mapstruct.Mapper;
 
-@Mapper
-public interface CourseMapper{
+@Mapper(componentModel = "spring")
+public interface CourseMapper extends MainMapper<CourseDTO, Course>{
 
-    CourseDTO courseToCourseDTO(Course course);
-    Course courseDTOToCourse(CourseDTO courseDTO);
+
 
 }

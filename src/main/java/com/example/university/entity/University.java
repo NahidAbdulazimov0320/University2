@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class University {
+public class University extends MainEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

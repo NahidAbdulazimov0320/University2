@@ -7,14 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public interface SchoolMapper {
-    @Mapping(target = "universityName", source = "university.name")
-    SchoolDTO toDTO (School school);
-    School DtoTo (SchoolDTO schoolDTO);
+public interface SchoolMapper extends MainMapper<SchoolDTO, School>{
 
-
-    @Mapping(target = "id", ignore = true)
-    School toEntity(@MappingTarget School school, SchoolDTO schoolDTO);
 
 
 }

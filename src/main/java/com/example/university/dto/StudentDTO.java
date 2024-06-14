@@ -8,7 +8,7 @@ import org.springframework.lang.Nullable;
 
 @Getter
 @AllArgsConstructor
-public class StudentDTO{
+public class StudentDTO extends MainDTO{
 
     @NotBlank
     @NotEmpty

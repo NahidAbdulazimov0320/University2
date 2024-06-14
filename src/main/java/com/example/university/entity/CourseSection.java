@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class CourseSection{
+public class CourseSection extends  MainEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

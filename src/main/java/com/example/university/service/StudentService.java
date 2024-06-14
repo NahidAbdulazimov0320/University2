@@ -1,13 +1,16 @@
 package com.example.university.service;
 
+import com.example.university.dto.StudentDTO;
+import com.example.university.entity.Student;
+import com.example.university.mappers.StudentMapper;
 import com.example.university.repository.StudentRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+
 @Service
-public class StudentService {
+public class StudentService extends MainService<StudentRepository, StudentMapper, StudentDTO, Long, Student> {
 
-  private final StudentRepository studentRepository;
-
+    public StudentService(StudentRepository repository, StudentMapper mapper) {
+        super(repository, mapper);
+    }
 }

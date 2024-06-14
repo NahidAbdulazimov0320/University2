@@ -4,10 +4,9 @@ import com.example.university.dto.EnrollmentDTO;
 import com.example.university.entity.Enrollment;
 import org.mapstruct.Mapper;
 
-@Mapper
-public interface EnrollmentMapper {
+@Mapper(componentModel = "spring")
+public interface EnrollmentMapper extends MainMapper<EnrollmentDTO, Enrollment> {
 
-    EnrollmentDTO enrollmentToEnrollmentDTO(Enrollment enrollment);
-    Enrollment enrollmentDTOToEnrollment(EnrollmentDTO enrollmentDTO);
+
 
 }
