@@ -14,9 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class School extends MainEntity{
-    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     private String name;
     private LocalDate establishmentDate;

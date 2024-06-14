@@ -10,16 +10,15 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class MainService<R extends MainRepository<O, Long>, M extends MainMapper<D, O>, D extends MainDTO, ID extends Long, O extends MainEntity> {
+public abstract class MainService<R extends MainRepository<O, Long>, D extends MainDTO, ID extends Long, O extends MainEntity, M extends MainMapper<D, O>> {
 
     /*
     R -> repository
-    M -> mapper
     D -> DTO
     ID -> id
     O -> Object
+    M -> mapper
      */
-
     private final R repository;
     private final M mapper;
 

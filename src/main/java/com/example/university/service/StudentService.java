@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class StudentService extends MainService<StudentRepository, StudentMapper, StudentDTO, Long, Student> {
+public class StudentService extends MainService<StudentRepository, StudentDTO, Long, Student, StudentMapper> {
 
     public StudentService(StudentRepository repository, StudentMapper mapper) {
         super(repository, mapper);

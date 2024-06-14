@@ -16,9 +16,6 @@ import java.util.List;
 @Entity
 public class CourseSection extends  MainEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name ="course_id")

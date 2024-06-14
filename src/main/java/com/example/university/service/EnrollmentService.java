@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class EnrollmentService extends MainService<EnrollmentRepository, EnrollmentMapper, EnrollmentDTO, Long, Enrollment> {
+public class EnrollmentService extends MainService<EnrollmentRepository, EnrollmentDTO, Long, Enrollment, EnrollmentMapper> {
 
     public EnrollmentService(EnrollmentRepository repository, EnrollmentMapper mapper) {
         super(repository, mapper);

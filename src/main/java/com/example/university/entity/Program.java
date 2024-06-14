@@ -14,11 +14,6 @@ import java.util.List;
 @Entity
 public class Program extends MainEntity{
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String name;
 
     @OneToMany(mappedBy = "program")

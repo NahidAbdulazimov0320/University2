@@ -15,10 +15,6 @@ import java.time.LocalTime;
 @Entity
 public class SectionSchedule extends MainEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
 
     @ManyToOne
     @JoinColumn(name = "section_id")

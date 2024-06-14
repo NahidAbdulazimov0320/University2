@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ProgramService extends MainService<ProgramRepository, ProgramMapper, ProgramDTO, Long, Program> {
+public class ProgramService extends MainService<ProgramRepository, ProgramDTO, Long, Program, ProgramMapper> {
 
     public ProgramService(ProgramRepository repository, ProgramMapper mapper) {
         super(repository, mapper);

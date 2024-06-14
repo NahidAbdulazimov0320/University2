@@ -32,18 +32,4 @@ public class UniversityDTO extends MainDTO {
     @Past
     private LocalDate establishment;
 
-    @NotBlank
-    private String gradingSystem;
-
-    @Null
-    private List<School> schools;
-
-    @Null
-    private List<Faculty> faculty;
-
-    @Null
-    private List<Staff> staff;
-
-    @Null
-    private List<Student> student;
 }
