@@ -1,13 +1,17 @@
 package com.example.university.entity;
 
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.springframework.stereotype.Component;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@Entity
+@Getter
+@Setter
+@EnableJpaRepositories
+// FIXME Find Annotation to share
 public abstract class MainEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -3,16 +3,16 @@ package com.example.university.service;
 
 import com.example.university.dto.CourseDTO;
 import com.example.university.entity.Course;
-import com.example.university.mappers.CourseMapper;
-import com.example.university.repository.CourseRepository;
+import com.example.university.mappers.MainMapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 
+//openapi, springdoc, swagger
+
 @Service
-public class CourseService extends MainService<CourseRepository, CourseDTO, Long, Course, CourseMapper> {
-
-
-    public CourseService(CourseRepository repository, CourseMapper mapper) {
+public class CourseService extends MainService<CourseDTO, Long, Course> {
+    public CourseService(JpaRepository<Course, Long> repository, MainMapper<CourseDTO, Course> mapper) {
         super(repository, mapper);
     }
 }

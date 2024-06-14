@@ -1,9 +1,6 @@
 package com.example.university.controller;
 
-import com.example.university.dto.MainDTO;
 import com.example.university.entity.MainEntity;
-import com.example.university.mappers.MainMapper;
-import com.example.university.repository.MainRepository;
 import com.example.university.service.MainService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -11,21 +8,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.annotation.Inherited;
 import java.util.List;
 
-
-@RestController
+//FIXME integrate with openapi
 @RequiredArgsConstructor
-public abstract class MainController<D extends MainDTO, ID extends Long, E extends MainEntity, R extends MainRepository<E, Long>, M extends MainMapper<D, E>, S extends MainService<R, D, ID, E, M>> {
+public abstract class MainController<D, ID extends Long, E extends MainEntity> {
+
     /*
     D -> DTO
     S -> Service
     ID -> id
     E -> Entity
      */
-    S service;
-
+    private final MainService<D, ID, E> service;
 
     @GetMapping
     public List<D> getAll() {

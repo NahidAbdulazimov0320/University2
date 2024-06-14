@@ -2,13 +2,13 @@ package com.example.university.service;
 
 import com.example.university.dto.CourseSectionDTO;
 import com.example.university.entity.CourseSection;
-import com.example.university.mappers.CourseSectionMapper;
-import com.example.university.repository.CourseSectionRepository;
+import com.example.university.mappers.MainMapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CourseSectionService extends MainService<CourseSectionRepository, CourseSectionDTO, Long, CourseSection, CourseSectionMapper> {
-    public CourseSectionService(CourseSectionRepository repository, CourseSectionMapper mapper) {
+public class CourseSectionService extends MainService<CourseSectionDTO, Long, CourseSection> {
+    public CourseSectionService(JpaRepository<CourseSection, Long> repository, MainMapper<CourseSectionDTO, CourseSection> mapper) {
         super(repository, mapper);
     }
 }

@@ -1,26 +1,20 @@
 package com.example.university.service;
 
-import com.example.university.dto.MainDTO;
 import com.example.university.entity.MainEntity;
 import com.example.university.exceptions.NoDataFound;
 import com.example.university.mappers.MainMapper;
-import com.example.university.repository.MainRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.io.Serializable;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class MainService<R extends MainRepository<O, Long>, D extends MainDTO, ID extends Long, O extends MainEntity, M extends MainMapper<D, O>> {
+public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
 
-    /*
-    R -> repository
-    D -> DTO
-    ID -> id
-    O -> Object
-    M -> mapper
-     */
-    private final R repository;
-    private final M mapper;
+
+    private final JpaRepository<O, ID> repository;
+    private final MainMapper<D, O> mapper;
 
 
     public List<D> getAll() {
@@ -39,7 +33,7 @@ public abstract class MainService<R extends MainRepository<O, Long>, D extends M
     }
 
 
-    public D create(D element) {
+    public D create(D element) { //optional initializers?
         return mapper.toDto(repository.save(mapper.toEntity(element)));
     }
 
