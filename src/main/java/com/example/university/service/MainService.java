@@ -1,7 +1,7 @@
 package com.example.university.service;
 
 import com.example.university.entity.MainEntity;
-import com.example.university.exceptions.NoDataFound;
+import com.example.university.exceptions.NoDataFoundException;
 import com.example.university.mappers.MainMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,7 +29,7 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
         return repository
                 .findById(id)
                 .map(mapper::toDto)
-                .orElseThrow(NoDataFound::new);
+                .orElseThrow(() -> new NoDataFoundException("There is no entity with this id = " + id));
     }
 
 
@@ -38,16 +38,17 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
     }
 
 
+
     public D updateById(ID id, D element) {
         return repository
                 .findById(id)
                 .map(object -> repository.save(mapper.toEntity(object, element)))
-                .map(mapper::toDto).orElseThrow(NoDataFound::new);
+                .map(mapper::toDto).orElseThrow(() -> new NoDataFoundException("There is no entity with this id = " + id));
     }
 
 
     public void deleteById(ID id) {
-        repository.delete(repository.findById(id).orElseThrow(NoDataFound::new));
+        repository.delete(repository.findById(id).orElseThrow(() -> new NoDataFoundException("There is no entity with this id = " + id)));
     }
 
 

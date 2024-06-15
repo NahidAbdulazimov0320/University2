@@ -20,4 +20,6 @@ public class SchoolDTO {
 
    @NotBlank
    private String universityName;
+
+   private Long university_id;
 }

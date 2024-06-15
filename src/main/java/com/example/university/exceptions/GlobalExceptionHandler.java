@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = NoSuchEntityFoundException.class)
+    @ExceptionHandler(value = NoDataFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public @ResponseBody ErrorResponse handleNoSuchEntityFoundException(NoSuchEntityFoundException ex){
+    public @ResponseBody ErrorResponse handleNoSuchEntityFoundException(NoDataFoundException ex){
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 

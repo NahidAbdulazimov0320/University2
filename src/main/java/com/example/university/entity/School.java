@@ -1,9 +1,7 @@
 package com.example.university.entity;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Persistent;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -15,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class School extends MainEntity{
+public class School extends MainEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -30,7 +28,7 @@ public class School extends MainEntity{
     private List<Program> programs = new LinkedList<>();
 
     @ManyToOne
-    @JoinColumn(name= "university_id")
+    @JoinColumn(name = "university_id")
     private University university;
 
     @OneToMany(mappedBy = "school")
