@@ -4,7 +4,7 @@ import com.example.university.entity.MainEntity;
 import com.example.university.exceptions.NoDataFound;
 import com.example.university.mappers.MainMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
 
 
-    private final JpaRepository<O, ID> repository;
+    private final JpaRepositoryImplementation<O, ID> repository;
     private final MainMapper<D, O> mapper;
 
 

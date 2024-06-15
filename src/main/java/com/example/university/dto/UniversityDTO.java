@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Past;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +18,9 @@ import java.util.List;
 @Getter
 @Setter
 public class UniversityDTO {
+
+    @Null
+    private Long id;
 
     @NotBlank
     private String name;
@@ -27,8 +31,24 @@ public class UniversityDTO {
     @NotBlank
     private String rector;
 
+    @NotBlank
+    private String gradingSystem;
+
     @NotNull
     @Past
     private LocalDate establishment;
+
+
+    @Nullable
+    private List<School> schools;
+
+    @Nullable
+    private List<Faculty> faculty;
+
+    @Nullable
+    private List<Staff> staff;
+
+    @Null
+    private List<Student> student;
 
 }

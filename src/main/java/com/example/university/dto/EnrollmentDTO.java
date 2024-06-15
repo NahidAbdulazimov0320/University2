@@ -8,6 +8,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+// TODO
 public class EnrollmentDTO {
 
     @Positive
@@ -18,5 +19,7 @@ public class EnrollmentDTO {
 
     @NotNull
      private Semester semester;
+
+
 
 }
