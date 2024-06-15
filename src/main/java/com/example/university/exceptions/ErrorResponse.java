@@ -1,20 +1,16 @@
 package com.example.university.exceptions;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
+import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ErrorResponse{
-
     private int statusCode;
     private String message;
-
-    public ErrorResponse(String message){
-        super();
-        this.message = message;
-    }
+    private LocalDateTime time;
 }

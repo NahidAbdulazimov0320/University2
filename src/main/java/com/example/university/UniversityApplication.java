@@ -1,6 +1,5 @@
 package com.example.university;
 
-import com.example.university.exceptions.NoSuchEntityFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

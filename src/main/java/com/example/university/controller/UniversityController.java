@@ -12,4 +12,7 @@ public class UniversityController extends MainController<UniversityDTO, Long, Un
     public UniversityController(MainService<UniversityDTO, Long, University> service) {
         super(service);
     }
+
+
+
 }
