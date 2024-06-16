@@ -1,21 +1,23 @@
 package com.example.university.exceptions;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import lombok.Getter;
+import java.time.LocalDateTime;
 
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
+@Getter
 public class NoDataFound extends RuntimeException {
+
+    private LocalDateTime time;
 
     public NoDataFound(){
         super();
     }
-    public NoDataFound(String message){
+    public NoDataFound(String message, LocalDateTime time){
         super(message);
+        this.time = time;
     }
     public NoDataFound(String message, Throwable cause){
         super(message, cause);
     }
 }
+
+

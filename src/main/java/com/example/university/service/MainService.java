@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
         return repository
                 .findById(id)
                 .map(mapper::toDto)
-                .orElseThrow(() -> new NoDataFound("No record found with id: " + id));
+                .orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now()));
     }
 
 
@@ -44,12 +45,12 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
         return repository
                 .findById(id)
                 .map(object -> repository.save(mapper.toEntity(object, element)))
-                .map(mapper::toDto).orElseThrow(() -> new NoDataFound("No record found with id: " + id));
+                .map(mapper::toDto).orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now()));
     }
 
 
     public void deleteById(ID id) {
-        repository.delete(repository.findById(id).orElseThrow(() -> new NoDataFound("No record found with id" + id)));
+        repository.delete(repository.findById(id).orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now())));
     }
 
 

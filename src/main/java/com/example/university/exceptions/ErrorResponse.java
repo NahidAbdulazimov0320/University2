@@ -2,7 +2,8 @@ package com.example.university.exceptions;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import java.time.LocalDateTime;
 
 
 @Getter
