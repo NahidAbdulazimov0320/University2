@@ -1,17 +1,18 @@
 package com.example.university.controller;
 
+import com.example.university.dto.CourseDTO;
+import com.example.university.entity.Course;
 import com.example.university.service.CourseService;
+import com.example.university.service.MainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/courses")
-public class CourseController {
+public class CourseController extends MainController<CourseDTO, Long, Course> {
 
-  private final CourseService courseService;
-
-
-
+  public CourseController(MainService<CourseDTO, Long, Course> service) {
+    super(service);
+  }
 }

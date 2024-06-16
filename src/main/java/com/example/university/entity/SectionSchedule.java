@@ -7,6 +7,7 @@ import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
 
+//TODO Replace with List<List<...Date>>
 @Getter
 @Setter
 @ToString

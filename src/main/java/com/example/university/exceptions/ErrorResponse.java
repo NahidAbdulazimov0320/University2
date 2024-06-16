@@ -1,20 +1,14 @@
 package com.example.university.exceptions;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
+
+@Getter
 @AllArgsConstructor
 public class ErrorResponse{
 
     private int statusCode;
     private String message;
 
-    public ErrorResponse(String message){
-        super();
-        this.message = message;
-    }
 }
