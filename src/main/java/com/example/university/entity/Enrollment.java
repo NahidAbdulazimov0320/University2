@@ -12,9 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 public class Enrollment  extends MainEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "student_id")

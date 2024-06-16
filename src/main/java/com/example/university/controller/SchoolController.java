@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/schools")
 public class SchoolController extends MainController<SchoolDTO, Long, School> {
-
     public SchoolController(MainService<SchoolDTO, Long, School> service) {
         super(service);
     }

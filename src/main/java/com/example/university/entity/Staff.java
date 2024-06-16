@@ -10,9 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 public class Staff extends MainEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "school_id")

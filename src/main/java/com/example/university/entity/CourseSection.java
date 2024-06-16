@@ -1,7 +1,5 @@
 package com.example.university.entity;
-
-
-import com.example.university.enums.Semester;
+import com.example.university.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,9 +14,6 @@ import java.util.List;
 @Entity
 public class CourseSection extends  MainEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name ="course_id")

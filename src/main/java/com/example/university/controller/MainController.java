@@ -4,13 +4,14 @@ import com.example.university.entity.MainEntity;
 import com.example.university.service.MainService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//FIXME integrate with openapi
+@Transactional // What is the difference between making class as transaction or method
 @RequiredArgsConstructor
 public abstract class MainController<D, ID extends Long, E extends MainEntity> {
 
@@ -33,14 +34,12 @@ public abstract class MainController<D, ID extends Long, E extends MainEntity> {
     }
 
     @PostMapping
-    @Transactional  // Atomicity -> either add all, or none
     @ResponseStatus(HttpStatus.CREATED)
     public D create(@RequestBody @Valid D element) {
         return service.create(element);
     }
 
     @PutMapping("/{id}")
-    @Transactional
     public D updateById(@PathVariable ID id, @RequestBody @Valid D element) {
         return service.updateById(id, element);
     }

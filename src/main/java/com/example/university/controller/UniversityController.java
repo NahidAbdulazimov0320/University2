@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/universities")
-public class UniversityController extends MainController<UniversityDTO, Long, University>{
+public class UniversityController extends MainController<UniversityDTO, Long, University> {
     public UniversityController(MainService<UniversityDTO, Long, University> service) {
         super(service);
     }
+
+
 
 }

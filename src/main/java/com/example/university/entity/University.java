@@ -15,9 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class University extends MainEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     @OneToMany(mappedBy = "university")
     private List<School> schools;

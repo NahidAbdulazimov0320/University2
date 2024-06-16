@@ -1,7 +1,8 @@
 package com.example.university.exceptions;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 
 @Getter
@@ -10,5 +11,5 @@ public class ErrorResponse{
 
     private int statusCode;
     private String message;
-
+    private LocalDateTime time;
 }
