@@ -5,7 +5,7 @@ import com.example.university.exceptions.NoDataFound;
 import com.example.university.mappers.MainMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,7 +17,6 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
 
     private final JpaRepositoryImplementation<O, ID> repository;
     private final MainMapper<D, O> mapper;
-
 
     public List<D> getAll() {
         return repository
@@ -40,7 +39,6 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
     }
 
 
-    @ExceptionHandler()
     public D updateById(ID id, D element) {
         return repository
                 .findById(id)

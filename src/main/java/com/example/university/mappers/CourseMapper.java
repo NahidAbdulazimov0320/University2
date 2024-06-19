@@ -8,5 +8,4 @@ import org.mapstruct.Mapper;
 public interface CourseMapper extends MainMapper<CourseDTO, Course>{
 
 
-
 }

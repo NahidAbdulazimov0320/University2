@@ -14,6 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CourseSectionDTO {
 
+    private Long id;
+
+
     @NotNull
     @NotEmpty
     @NotBlank

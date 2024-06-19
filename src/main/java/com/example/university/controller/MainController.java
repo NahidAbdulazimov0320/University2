@@ -6,12 +6,13 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 //FIXME integrate with openapi
-@Transactional // What is the difference between making class as transaction or method
+@Transactional
 @RequiredArgsConstructor
 public abstract class MainController<D, ID extends Long, E extends MainEntity> {
 
@@ -22,6 +23,8 @@ public abstract class MainController<D, ID extends Long, E extends MainEntity> {
     E -> Entity
      */
     private final MainService<D, ID, E> service;
+
+
 
     @GetMapping
     public List<D> getAll() {

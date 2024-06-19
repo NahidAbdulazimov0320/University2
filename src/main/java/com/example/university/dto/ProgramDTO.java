@@ -14,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ProgramDTO {
 
+    private Long id;
+
     @NotBlank
     private String name;
 

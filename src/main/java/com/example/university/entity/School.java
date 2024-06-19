@@ -22,14 +22,14 @@ public class School extends MainEntity {
 
     private String dean;
 
-    private LocalDate establishmentDate = LocalDate.now();
-
-    @OneToMany(mappedBy = "school")
-    private List<Program> programs;
+    private LocalDate establishmentDate;
 
     @ManyToOne
     @JoinColumn(name = "university_id")
     private University university;
+
+    @OneToMany(mappedBy = "school")
+    private List<Program> programs;
 
     @OneToMany(mappedBy = "school")
     private List<Faculty> faculty;

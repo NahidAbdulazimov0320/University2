@@ -15,6 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class CourseDTO {
 
+    private Long id;
+
     @NotBlank
     private String name;
 

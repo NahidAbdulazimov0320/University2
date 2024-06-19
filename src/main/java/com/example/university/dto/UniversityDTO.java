@@ -19,7 +19,6 @@ import java.util.List;
 @Setter
 public class UniversityDTO {
 
-    @Null
     private Long id;
 
     @NotBlank
