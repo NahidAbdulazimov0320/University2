@@ -16,7 +16,6 @@ public class CourseSectionDTO {
 
     private Long id;
 
-
     @NotNull
     @NotEmpty
     @NotBlank

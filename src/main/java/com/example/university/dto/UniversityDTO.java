@@ -37,17 +37,4 @@ public class UniversityDTO {
     @Past
     private LocalDate establishment;
 
-
-    @Nullable
-    private List<School> schools;
-
-    @Nullable
-    private List<Faculty> faculty;
-
-    @Nullable
-    private List<Staff> staff;
-
-    @Null
-    private List<Student> student;
-
 }

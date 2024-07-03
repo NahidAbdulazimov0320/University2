@@ -14,11 +14,12 @@ import java.util.List;
 @Entity
 public class CourseSection extends  MainEntity{
 
-
     @ManyToOne
     @JoinColumn(name ="course_id")
-    private Course mainCourse;
+    private Course course;
 
+    @OneToMany
+    private Faculty professor;
 
     @OneToMany(mappedBy = "courseSection")
     private List<Enrollment> enrollments = new LinkedList<>();

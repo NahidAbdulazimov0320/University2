@@ -14,10 +14,6 @@ import java.util.List;
 @Entity
 public class School extends MainEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String name;
 
     private String dean;

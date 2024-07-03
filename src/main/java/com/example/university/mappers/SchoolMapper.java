@@ -11,14 +11,14 @@ import org.mapstruct.Mapping;
 
 public interface SchoolMapper extends MainMapper<SchoolDTO, School> {
 
-    @Override
+
     @Mapping(source = "university.id", target = "university_id")
-    SchoolDTO toDto(School program);
+    SchoolDTO toDto(School school);
 
-    @Override
+    @Mapping(target = "staff", ignore = true)
+    @Mapping(target = "programs", ignore = true)
+    @Mapping(target = "faculty", ignore = true)
     @Mapping(source = "university_id", target = "university.id")
-    School toEntity(SchoolDTO programDTO);
+    School toEntity(SchoolDTO schoolDTO);
 
-//    @Override
-//    School toEntity(School program, SchoolDTO programDTO);
 }

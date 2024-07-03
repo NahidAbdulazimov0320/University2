@@ -14,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
 
-
     private final JpaRepositoryImplementation<O, ID> repository;
     private final MainMapper<D, O> mapper;
 

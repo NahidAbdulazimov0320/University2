@@ -26,9 +26,6 @@ public class University extends MainEntity{
     @OneToMany
     private List<Staff> staff;
 
-    @OneToMany(mappedBy = "university")
-    private List<Student> student;
-
 
     private String name;
     private String location;

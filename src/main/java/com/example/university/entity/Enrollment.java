@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 public class Enrollment  extends MainEntity{
 
-
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
@@ -23,11 +22,7 @@ public class Enrollment  extends MainEntity{
     @JoinColumn(name = "course_section_id")
     private CourseSection courseSection;
 
-
     private LocalDateTime enrolledTime;
-
-
-
 
 
 }

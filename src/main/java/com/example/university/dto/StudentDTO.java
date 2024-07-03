@@ -3,10 +3,7 @@ package com.example.university.dto;
 import com.example.university.entity.Enrollment;
 import com.example.university.entity.Program;
 import com.example.university.entity.University;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.lang.Nullable;
@@ -20,30 +17,23 @@ public class StudentDTO {
     private Long id;
 
     @NotBlank
-    @NotEmpty
-    @NotNull
     private String name;
 
     @NotBlank
-    @NotEmpty
-    @NotNull
     private String surname;
 
-    @Nullable
+    @NotBlank
     private String email;
 
-    @Nullable
+    @NotBlank
     private String address;
 
-    @Nullable
+    @NotBlank
     private String phoneNumber;
 
-    @Null
-    private Set<Enrollment> enrollments;
+    @NotNull
+    @Positive
+    private Long program_id;
 
-    @Null
-    private Program program;
 
-    @Null
-    private University university;
 }

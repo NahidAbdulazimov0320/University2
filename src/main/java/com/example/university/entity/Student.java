@@ -25,17 +25,9 @@ public class Student extends MainEntity{
     @OneToMany(mappedBy = "student")
     private Set<Enrollment> enrollments = new HashSet<>();
 
+
     @ManyToOne
     @JoinColumn(name="program_id")
     private Program program;
-    
-    @ManyToOne
-    @JoinColumn(name="university_id")
-    private University university;
-
-
-
-
-
 
 }

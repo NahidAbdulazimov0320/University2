@@ -15,7 +15,10 @@ import java.util.Set;
 public class Course extends MainEntity {
 
     private String name;
+
+    @Lob
     private String description;
+
     private boolean isActive;
 
     @OneToMany
@@ -25,7 +28,7 @@ public class Course extends MainEntity {
     private List<Course> coreRequisite;
 
 
-    @OneToMany(mappedBy = "mainCourse")
+    @OneToMany(mappedBy = "course")
     private Set<CourseSection> courseSections;
 
 

@@ -11,17 +11,11 @@ import lombok.*;
 @Entity
 public class Faculty extends MainEntity{
 
-
     private String name;
     private String surname;
-
 
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
-
-    @ManyToOne
-    @JoinColumn(name= "university_id")
-    private University university;
 
 }

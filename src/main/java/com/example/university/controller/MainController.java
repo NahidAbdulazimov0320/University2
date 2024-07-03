@@ -5,16 +5,18 @@ import com.example.university.service.MainService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.io.Serializable;
 import java.util.List;
 
-//FIXME integrate with openapi
 @Transactional
 @RequiredArgsConstructor
-public abstract class MainController<D, ID extends Long, E extends MainEntity> {
+public abstract class MainController<D, ID extends Serializable, E extends MainEntity> {
 
     /*
     D -> DTO
@@ -24,7 +26,7 @@ public abstract class MainController<D, ID extends Long, E extends MainEntity> {
      */
     private final MainService<D, ID, E> service;
 
-
+    private static final Logger logger = LoggerFactory.getLogger(ProgramController.class);
 
     @GetMapping
     public List<D> getAll() {
@@ -39,6 +41,7 @@ public abstract class MainController<D, ID extends Long, E extends MainEntity> {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public D create(@RequestBody @Valid D element) {
+        logger.info("Request is made to create an entity");
         return service.create(element);
     }
 
