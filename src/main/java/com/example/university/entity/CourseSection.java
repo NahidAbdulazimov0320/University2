@@ -1,6 +1,9 @@
 package com.example.university.entity;
-import com.example.university.enums.*;
-import jakarta.persistence.*;
+
+import com.example.university.enums.Semester;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import java.util.LinkedList;
@@ -12,14 +15,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class CourseSection extends  MainEntity{
+public class CourseSection extends MainEntity {
 
     @ManyToOne
-    @JoinColumn(name ="course_id")
     private Course course;
 
     @OneToMany
-    private Faculty professor;
+    private List<Faculty> professor;
 
     @OneToMany(mappedBy = "courseSection")
     private List<Enrollment> enrollments = new LinkedList<>();

@@ -14,5 +14,4 @@ public class UniversityController extends MainController<UniversityDTO, Long, Un
     }
 
 
-
 }

@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class SectionSchedule extends MainEntity{
+public class SectionSchedule extends MainEntity {
 
 
     @ManyToOne
@@ -23,7 +23,6 @@ public class SectionSchedule extends MainEntity{
 
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
-
 
 
     private LocalTime startTime;

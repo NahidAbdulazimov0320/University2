@@ -1,7 +1,6 @@
 package com.example.university.mappers;
 
 import com.example.university.entity.MainEntity;
-import org.mapstruct.Mapper;
 import org.mapstruct.MapperConfig;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

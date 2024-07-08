@@ -1,6 +1,7 @@
 package com.example.university.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,28 +15,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class University extends MainEntity{
-
+public class University extends MainEntity {
 
     @OneToMany(mappedBy = "university")
     private List<School> schools;
 
-    @OneToMany(mappedBy = "university")
-    private List<Faculty> faculty;
-
     @OneToMany
     private List<Staff> staff;
-
 
     private String name;
     private String location;
     private LocalDate establishment;
     private String rector;
     private String gradingSystem;
-
-
-
-
-
 
 }

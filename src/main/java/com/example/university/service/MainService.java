@@ -5,7 +5,6 @@ import com.example.university.exceptions.NoDataFound;
 import com.example.university.mappers.MainMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -32,8 +31,7 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
                 .orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now()));
     }
 
-
-    public D create(D element) { //optional initializers?
+    public D create(D element) {
         return mapper.toDto(repository.save(mapper.toEntity(element)));
     }
 

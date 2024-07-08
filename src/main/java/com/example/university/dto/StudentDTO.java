@@ -1,14 +1,10 @@
 package com.example.university.dto;
 
-import com.example.university.entity.Enrollment;
-import com.example.university.entity.Program;
-import com.example.university.entity.University;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.lang.Nullable;
-
-import java.util.Set;
 
 @Getter
 @AllArgsConstructor

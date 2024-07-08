@@ -11,5 +11,4 @@ import org.mapstruct.Mapper;
 public interface EnrollmentMapper extends MainMapper<EnrollmentDTO, Enrollment> {
 
 
-
 }

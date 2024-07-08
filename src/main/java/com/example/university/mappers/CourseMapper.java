@@ -1,17 +1,12 @@
 package com.example.university.mappers;
 
 import com.example.university.dto.CourseDTO;
-import com.example.university.dto.ProgramDTO;
-import com.example.university.dto.SchoolDTO;
 import com.example.university.entity.Course;
-import com.example.university.entity.Program;
-import com.example.university.entity.School;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface CourseMapper extends MainMapper<CourseDTO, Course>{
-
+public interface CourseMapper extends MainMapper<CourseDTO, Course> {
 
 
     @Mapping(target = "isActive", source = "active")

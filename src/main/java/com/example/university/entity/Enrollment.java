@@ -1,6 +1,8 @@
 package com.example.university.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -11,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Enrollment  extends MainEntity{
+public class Enrollment extends MainEntity {
 
     @ManyToOne
     @JoinColumn(name = "student_id")

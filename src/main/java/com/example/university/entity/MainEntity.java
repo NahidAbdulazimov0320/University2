@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Getter
 @Setter

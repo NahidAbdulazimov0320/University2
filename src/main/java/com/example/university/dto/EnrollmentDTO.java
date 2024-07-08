@@ -13,14 +13,13 @@ public class EnrollmentDTO {
     private Long id;
 
     @Positive
-     private Long studentId;
+    private Long studentId;
 
     @Positive
-     private Long courseSectionId;
+    private Long courseSectionId;
 
     @NotNull
-     private Semester semester;
-
+    private Semester semester;
 
 
 }
