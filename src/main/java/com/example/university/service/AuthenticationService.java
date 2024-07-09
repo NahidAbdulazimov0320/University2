@@ -1,13 +1,12 @@
 package com.example.university.service;
 
-import com.example.university.controller.AuthenticationRequest;
-import com.example.university.controller.AuthenticationResponse;
+import com.example.university.config.AuthenticationRequest;
+import com.example.university.config.AuthenticationResponse;
 import com.example.university.controller.RegisterRequest;
 import com.example.university.entity.User;
 import com.example.university.enums.Role;
 import com.example.university.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +29,7 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -38,10 +37,10 @@ public class AuthenticationService {
     }
 
     public Optional<AuthenticationResponse> authenticate(AuthenticationRequest request) {
-      authenticationManager.authenticate(
-              new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-      );
-      var user = userRepository.findByEmail(request.getEmail()).orElse(null);
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+        );
+        var user = userRepository.findByEmail(request.getEmail()).orElse(null);
         var jwtToken = jwtService.generateToken(user);
         return Optional.of(AuthenticationResponse.builder().token(jwtToken).build());
     }

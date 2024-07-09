@@ -1,5 +1,7 @@
 package com.example.university.controller;
 
+import com.example.university.config.AuthenticationRequest;
+import com.example.university.config.AuthenticationResponse;
 import com.example.university.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request){
+            @RequestBody RegisterRequest request) {
         return ResponseEntity.of(authenticationService.register(request));
     }
 
@@ -28,8 +30,6 @@ public class AuthenticationController {
         return ResponseEntity.of(authenticationService.authenticate(request));
 
     }
-
-
 
 
 }

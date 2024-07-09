@@ -1,4 +1,4 @@
-package com.example.university.controller;
+package com.example.university.config;
 
 
 import lombok.AllArgsConstructor;

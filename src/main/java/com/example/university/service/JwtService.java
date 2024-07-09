@@ -25,13 +25,10 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-
     private <T> T extractClaim(String token, Function<Claims, T> claimExtract) {
         return claimExtract.apply(extractAllClaims(token));
     }
 
-
-    // Can add extra claims for third parties
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts
                 .builder()
@@ -58,11 +55,9 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
 
     private Claims extractAllClaims(String token) {
         return Jwts

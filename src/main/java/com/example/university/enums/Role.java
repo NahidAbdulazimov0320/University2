@@ -3,5 +3,6 @@ package com.example.university.enums;
 public enum Role {
 
     USER,
-    ADMIN
+    ADMIN,
+    SUPER_ADMIN
 }
