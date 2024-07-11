@@ -24,11 +24,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(CsrfConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/api/v1/auth/**").permitAll()
-                            .requestMatchers("/university/**").hasAuthority(Role.ADMIN.name())
-                            .anyRequest().authenticated();
-                }).sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/universities/**").hasAuthority(Role.ADMIN.name())
+                        .requestMatchers("/schools/**", "/students/**", "/programs/**", "/courses/**", "/enrollments/**", "/faculties/**").hasAnyAuthority(Role.ADMIN.name(), Role.MANAGER.name())
+                        .requestMatchers("/coursesSections/**").hasAnyAuthority(Role.MANAGER.name())
+                        // .requestMatchers("/s).hasAnyAuthority(Role.MANAGER.name())
+                        .anyRequest().authenticated()).sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

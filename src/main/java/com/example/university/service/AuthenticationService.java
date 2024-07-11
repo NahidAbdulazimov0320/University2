@@ -33,6 +33,7 @@ public class AuthenticationService {
                 .credentialsNonExpired(true)
                 .enabled(true)
                 .role(request.getRole())
+
                 .build();
 
         userRepository.save(user);
