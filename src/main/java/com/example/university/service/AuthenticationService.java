@@ -1,10 +1,9 @@
 package com.example.university.service;
 
-import com.example.university.config.AuthenticationRequest;
-import com.example.university.config.AuthenticationResponse;
-import com.example.university.controller.RegisterRequest;
+import com.example.university.dto.AuthenticationRequest;
+import com.example.university.dto.AuthenticationResponse;
+import com.example.university.dto.RegisterRequest;
 import com.example.university.entity.User;
-import com.example.university.enums.Role;
 import com.example.university.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,8 +28,13 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
-                .role(Role.ADMIN)
+                .accountNonExpired(true)
+                .accountNonLocked(true)
+                .credentialsNonExpired(true)
+                .enabled(true)
+                .role(request.getRole())
                 .build();
+
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return Optional.of(AuthenticationResponse.builder().token(jwtToken).build());

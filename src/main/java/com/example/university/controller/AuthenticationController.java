@@ -1,7 +1,8 @@
 package com.example.university.controller;
 
-import com.example.university.config.AuthenticationRequest;
-import com.example.university.config.AuthenticationResponse;
+import com.example.university.dto.AuthenticationRequest;
+import com.example.university.dto.AuthenticationResponse;
+import com.example.university.dto.RegisterRequest;
 import com.example.university.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

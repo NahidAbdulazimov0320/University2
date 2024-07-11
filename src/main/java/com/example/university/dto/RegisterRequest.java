@@ -1,5 +1,6 @@
-package com.example.university.controller;
+package com.example.university.dto;
 
+import com.example.university.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class RegisterRequest {
     private String lastName;
     private String email;
     private String password;
+    private Role role;
 }

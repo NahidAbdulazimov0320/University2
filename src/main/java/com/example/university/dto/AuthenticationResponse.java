@@ -1,4 +1,4 @@
-package com.example.university.config;
+package com.example.university.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
