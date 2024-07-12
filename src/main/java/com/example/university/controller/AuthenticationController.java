@@ -4,12 +4,14 @@ import com.example.university.dto.AuthenticationRequest;
 import com.example.university.dto.AuthenticationResponse;
 import com.example.university.dto.RegisterRequest;
 import com.example.university.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -18,18 +20,28 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    @PostMapping("/sign-up")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AuthenticationResponse register(
             @RequestBody RegisterRequest request) {
-        return ResponseEntity.of(authenticationService.register(request));
+        return authenticationService.register(request);
     }
 
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticateRequest(
+    @PostMapping("/sign-in")
+    @ResponseStatus(HttpStatus.OK)
+    public AuthenticationResponse authenticateRequest(
             @RequestBody AuthenticationRequest request) {
-        return ResponseEntity.of(authenticationService.authenticate(request));
+        return authenticationService.authenticate(request);
 
+    }
+
+    @PostMapping("/refresh-token")
+    @ResponseStatus(HttpStatus.OK)
+    public void refreshToken(
+            HttpServletRequest request, HttpServletResponse response
+    ) throws IOException {
+        authenticationService.refreshToken(request, response);
     }
 
 
