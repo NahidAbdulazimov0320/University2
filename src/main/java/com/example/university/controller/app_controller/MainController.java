@@ -5,12 +5,12 @@ import com.example.university.service.app_service.MainService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Transactional
 @RequiredArgsConstructor
@@ -18,12 +18,10 @@ public abstract class MainController<D, ID extends Serializable, E extends MainE
 
     private final MainService<D, ID, E> service;
 
-
-
-    // Converted List to Page for speeding up the process of querying from database, and sort
+    // Converting List to Pageable for speeding up the process of querying from database, and sort
     @GetMapping
-    public Page<D> getAll(Pageable pageable) {
-        return service.getAll(pageable);
+    public List<D> getAll(Pageable pageable) {
+        return service.getAll(pageable).get().toList();
     }
 
     @GetMapping("/{id}")

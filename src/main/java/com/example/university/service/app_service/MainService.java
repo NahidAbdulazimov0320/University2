@@ -7,11 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RequiredArgsConstructor
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
