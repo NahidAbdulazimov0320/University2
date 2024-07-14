@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EnrollmentService extends MainService<EnrollmentDTO, Long, Enrollment> {
+
+
     public EnrollmentService(JpaRepositoryImplementation<Enrollment, Long> repository, MainMapper<EnrollmentDTO, Enrollment> mapper) {
         super(repository, mapper);
     }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CourseService extends MainService<CourseDTO, Long, Course> {
+
+
     public CourseService(JpaRepositoryImplementation<Course, Long> repository, MainMapper<CourseDTO, Course> mapper) {
         super(repository, mapper);
     }

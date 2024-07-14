@@ -27,7 +27,8 @@ public class SecurityConfig {
             "/v3/api-docs/**",
             "/webjars/**",
             "/swagger-resources",
-            "/api/v1/auth/sign-up"
+            "/api/v1/auth/sign-up",
+            "api/v1/auth/sign-in"
     };
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -38,12 +39,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(CsrfConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers(WHITE_LIST_URL).permitAll()
-                        .requestMatchers("api/v1/auth/sign-in").permitAll()
+                .authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers(WHITE_LIST_URL).permitAll()
                         .requestMatchers("/universities/**").hasAuthority(Role.ADMIN.name())
                         .requestMatchers("/students/**", "/programs/**", "/courses/**", "/enrollments/**", "/faculties/**").hasAnyAuthority(Role.ADMIN.name(), Role.MANAGER.name())
                         .requestMatchers("/coursesSections/**").hasAnyAuthority(Role.MANAGER.name(), Role.ADMIN.name())
-                        .anyRequest().authenticated()).sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .anyRequest().authenticated()
+                ).sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(httpSecurityLogoutConfigurer -> {
