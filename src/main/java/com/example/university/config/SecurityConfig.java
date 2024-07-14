@@ -26,7 +26,8 @@ public class SecurityConfig {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/webjars/**",
-            "/swagger-resources"
+            "/swagger-resources",
+            "/api/v1/auth/sign-up"
     };
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -39,10 +40,9 @@ public class SecurityConfig {
                 .csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers(WHITE_LIST_URL).permitAll()
                         .requestMatchers("api/v1/auth/sign-in").permitAll()
-                        .requestMatchers("/api/v1/auth/sign-up").hasAuthority(Role.ADMIN.name())
                         .requestMatchers("/universities/**").hasAuthority(Role.ADMIN.name())
                         .requestMatchers("/students/**", "/programs/**", "/courses/**", "/enrollments/**", "/faculties/**").hasAnyAuthority(Role.ADMIN.name(), Role.MANAGER.name())
-                        .requestMatchers("/coursesSections/**").hasAnyAuthority(Role.MANAGER.name())
+                        .requestMatchers("/coursesSections/**").hasAnyAuthority(Role.MANAGER.name(), Role.ADMIN.name())
                         .anyRequest().authenticated()).sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

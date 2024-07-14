@@ -1,6 +1,6 @@
 package com.example.university.mappers;
 
-import com.example.university.entity.MainEntity;
+import com.example.university.entity.main_entities.MainEntity;
 import org.mapstruct.MapperConfig;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -9,10 +9,10 @@ import org.mapstruct.MappingTarget;
 @MapperConfig
 public interface MainMapper<D, M extends MainEntity> {
 
-    D toDto(M program);
+    D toDto(M entity);
 
-    M toEntity(D programDTO);
+    M toEntity(D dto);
 
     @Mapping(target = "id", ignore = true)
-    M toEntity(@MappingTarget M program, D programDTO);
+    M toEntity(@MappingTarget M entity, D dto);
 }

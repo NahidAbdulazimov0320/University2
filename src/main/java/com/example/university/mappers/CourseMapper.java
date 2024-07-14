@@ -1,7 +1,7 @@
 package com.example.university.mappers;
 
 import com.example.university.dto.CourseDTO;
-import com.example.university.entity.Course;
+import com.example.university.entity.main_entities.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 public interface CourseMapper extends MainMapper<CourseDTO, Course> {
 
 
-    @Mapping(target = "isActive", source = "active")
     @Mapping(target = "program_id", source = "program.id")
     CourseDTO toDto(Course course);
 

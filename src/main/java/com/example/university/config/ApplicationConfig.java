@@ -1,6 +1,6 @@
 package com.example.university.config;
 
-import com.example.university.service.UserDetailsService;
+import com.example.university.service.security_service.UserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

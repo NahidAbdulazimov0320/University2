@@ -1,8 +1,8 @@
 package com.example.university.dto;
 
-import com.example.university.entity.Course;
-import com.example.university.entity.Enrollment;
-import com.example.university.entity.SectionSchedule;
+import com.example.university.entity.main_entities.Course;
+import com.example.university.entity.main_entities.Enrollment;
+import com.example.university.entity.main_entities.SectionSchedule;
 import com.example.university.enums.Semester;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

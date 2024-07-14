@@ -1,7 +1,7 @@
 package com.example.university.mappers;
 
 import com.example.university.dto.FacultyDTO;
-import com.example.university.entity.Faculty;
+import com.example.university.entity.main_entities.Faculty;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

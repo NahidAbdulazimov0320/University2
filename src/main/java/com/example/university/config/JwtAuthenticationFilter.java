@@ -1,8 +1,8 @@
 package com.example.university.config;
 
 import com.example.university.repository.TokenRepository;
-import com.example.university.service.JwtService;
-import com.example.university.service.UserDetailsService;
+import com.example.university.service.security_service.JwtService;
+import com.example.university.service.security_service.UserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
+
         final String jwt;
         final String userEmail;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {

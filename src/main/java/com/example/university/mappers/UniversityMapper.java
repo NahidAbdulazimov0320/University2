@@ -1,9 +1,8 @@
 package com.example.university.mappers;
 
 import com.example.university.dto.UniversityDTO;
-import com.example.university.entity.University;
+import com.example.university.entity.main_entities.University;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 //@Mapper(config = CentralConfig.class)
 @Mapper(componentModel = "spring")
