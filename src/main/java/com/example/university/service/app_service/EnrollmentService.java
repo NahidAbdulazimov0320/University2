@@ -6,7 +6,6 @@ import com.example.university.mappers.MainMapper;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class EnrollmentService extends MainService<EnrollmentDTO, Long, Enrollment> {
 

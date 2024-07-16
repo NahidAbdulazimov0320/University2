@@ -6,6 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
+import org.springdoc.core.converters.models.MonetaryAmount;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter

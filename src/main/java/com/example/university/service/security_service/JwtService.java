@@ -19,31 +19,34 @@ import java.util.function.Function;
 public class JwtService {
 
     @Value("${jwt.secret.key}")
-    private String SECRET_KEY;
+    private static String SECRET_KEY;
 
     @Value("${jwt.expiration}")
-    private Long jwtExpiration;
+    private static Long jwtExpiration;
 
     @Value("${jwt.refresh-token.expiration}")
-    private Long refreshTokenExpiration;
+    private static Long refreshTokenExpiration;
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+    private static Claims allClaims;
+
+
+    public String extractUsername() {
+        return extractClaim(Claims::getSubject);
     }
 
-    private <T> T extractClaim(String token, Function<Claims, T> claimExtract) {
-        return claimExtract.apply(extractAllClaims(token));
+    private <T> T extractClaim(Function<Claims, T> claimExtract) {
+        return claimExtract.apply(allClaims);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public static String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
-    public String generateRefreshToken(UserDetails userDetails) {
+    public static String generateRefreshToken(UserDetails userDetails) {
         return buildToken(new HashMap<>(), userDetails, refreshTokenExpiration);
     }
 
-    private String buildToken(Map<String, Object> claims, UserDetails userDetails, long expiration) {
+    private static String buildToken(Map<String, Object> claims, UserDetails userDetails, long expiration) {
         return Jwts
                 .builder()
                 .setClaims(claims)
@@ -54,37 +57,22 @@ public class JwtService {
                 .compact();
     }
 
-
-    public String generateToken(UserDetails userDetails) {
+    public static String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String userName = extractUsername(token);
-        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts
+    public Claims extractAllClaims(String token) {
+        allClaims = Jwts
                 .parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+        return allClaims;
     }
 
-    private Key getSigningKey() {
+    private static Key getSigningKey() {
         byte[] bytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(bytes);
     }
-
 }

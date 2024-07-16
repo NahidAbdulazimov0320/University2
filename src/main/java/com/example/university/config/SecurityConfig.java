@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 @Configuration
@@ -24,16 +23,15 @@ public class SecurityConfig {
             "swagger-resources/**",
             "/v2/api-docs",
             "/v3/api-docs",
-            "/v3/api-docs/**",
             "/webjars/**",
-            "/swagger-resources",
             "/api/v1/auth/sign-up",
-            "api/v1/auth/sign-in"
+            "/api/v1/auth/sign-in"
     };
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
+    private final CustomAuthenticationFilter customAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,22 +39,22 @@ public class SecurityConfig {
                 .csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(WHITE_LIST_URL).permitAll()
-                        .requestMatchers("/universities/**").hasAuthority(Role.ADMIN.name())
-                        .requestMatchers("/students/**", "/programs/**", "/courses/**", "/enrollments/**", "/faculties/**").hasAnyAuthority(Role.ADMIN.name(), Role.MANAGER.name())
-                        .requestMatchers("/coursesSections/**").hasAnyAuthority(Role.MANAGER.name(), Role.ADMIN.name())
-                        .anyRequest().authenticated()
-                ).sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                .requestMatchers("/universities/**").hasAuthority(Role.ADMIN.name())
+                                .requestMatchers("/students/**", "/programs/**", "/courses/**", "/enrollments/**", "/faculties/**").hasAnyAuthority(Role.ADMIN.name(), Role.MANAGER.name())
+                                .requestMatchers("/coursesSections/**").hasAnyAuthority(Role.MANAGER.name(), Role.ADMIN.name())
+                                .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout(httpSecurityLogoutConfigurer -> {
-                    httpSecurityLogoutConfigurer.logoutUrl("/api/v1/auth/logout");
-                    httpSecurityLogoutConfigurer.addLogoutHandler(logoutHandler);
-                    httpSecurityLogoutConfigurer.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+                .addFilter(customAuthenticationFilter)
+                .addFilterBefore(jwtAuthenticationFilter, CustomAuthenticationFilter.class)
+                .logout(logout -> {
+                    logout.logoutUrl("/api/v1/auth/logout");
+                    logout.addLogoutHandler(logoutHandler);
+                    logout.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
                 });
 
         return http.build();
-
-
     }
 
 }

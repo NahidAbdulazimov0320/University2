@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CourseSectionService extends MainService<CourseSectionDTO, Long, CourseSection> {
-
-
     public CourseSectionService(JpaRepositoryImplementation<CourseSection, Long> repository, MainMapper<CourseSectionDTO, CourseSection> mapper) {
         super(repository, mapper);
     }

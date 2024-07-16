@@ -5,6 +5,7 @@ import com.example.university.service.app_service.MainService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,9 @@ public abstract class MainController<D, ID extends Serializable, E extends MainE
 
     private final MainService<D, ID, E> service;
 
-    // Converting List to Pageable for speeding up the process of querying from database, and sort
     @GetMapping
-    public List<D> getAll(Pageable pageable) {
-        return service.getAll(pageable).get().toList();
+    public Page<D> getAll(Pageable pageable) {
+        return service.getAll(pageable);
     }
 
     @GetMapping("/{id}")
