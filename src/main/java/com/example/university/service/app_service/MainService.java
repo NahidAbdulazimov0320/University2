@@ -3,6 +3,9 @@ package com.example.university.service.app_service;
 import com.example.university.entity.main_entities.MainEntity;
 import com.example.university.exceptions.NoDataFound;
 import com.example.university.mappers.MainMapper;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +13,7 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
@@ -17,9 +21,12 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
     private final JpaRepositoryImplementation<O, ID> repository;
     private final MainMapper<D, O> mapper;
 
+    private Cache<String, List<O>> cache;
 
     public Page<D> getAll(Pageable pageable) {
-        return repository.findAll(pageable).map(mapper::toDto);
+        Page<O> all = repository.findAll(pageable);
+        cache.put("cache", all.get().toList());
+        return all.map(mapper::toDto);
     }
 
     public D getById(ID id) {
@@ -44,5 +51,14 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
         repository.delete(repository.findById(id).orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now())));
     }
 
+
+    @PostConstruct
+    public void init() {
+        cache = Caffeine
+                .newBuilder()
+                .maximumSize(100)
+                .build();
+
+    }
 
 }

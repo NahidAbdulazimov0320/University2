@@ -40,7 +40,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword());
             return authenticationProvider.authenticate(authToken);
         } catch (IOException | AuthenticationException ef) {
-            logger.info("Exception thrown inside attemptAuthentication!");
             throw new RuntimeException("Unable to authenticate user");
         }
     }
