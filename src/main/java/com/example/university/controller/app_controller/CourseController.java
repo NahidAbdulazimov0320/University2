@@ -1,5 +1,4 @@
 package com.example.university.controller.app_controller;
-
 import com.example.university.dto.CourseDTO;
 import com.example.university.entity.main_entities.Course;
 import com.example.university.service.app_service.MainService;

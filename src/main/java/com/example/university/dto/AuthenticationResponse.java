@@ -3,16 +3,14 @@ package com.example.university.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class AuthenticationResponse {
-    @JsonProperty("access_token")
+    @JsonProperty("token")
     private String token;
-    @JsonProperty("refresh_token")
-    private String refreshToken;
 }

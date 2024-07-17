@@ -8,12 +8,14 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
@@ -23,9 +25,16 @@ public abstract class MainService<D, ID extends Serializable, O extends MainEnti
 
     private Cache<String, List<O>> cache;
 
-    public Page<D> getAll(Pageable pageable) {
+    public Page<D> getAll(Pageable pageable){
+        if (cache.getIfPresent("cache") != null) {
+            List<D> cachedData = Objects.requireNonNull(cache.getIfPresent("cache")).stream()
+                    .map(mapper::toDto)
+                    .toList();
+            return new PageImpl<>(cachedData, pageable, cachedData.size());
+        }
         Page<O> all = repository.findAll(pageable);
-        cache.put("cache", all.get().toList());
+        List<O> entities = all.getContent();
+        cache.put("cache", entities);
         return all.map(mapper::toDto);
     }
 

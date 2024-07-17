@@ -1,5 +1,7 @@
 package com.example.university.service.security_service;
 
+import com.example.university.entity.auth_entities.Token;
+import com.example.university.enums.TokenType;
 import com.example.university.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class LogoutService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
+    private final JwtService jwtService;
 
     @Override
     public void logout(
@@ -24,11 +27,14 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         final String token = authHeader.substring(7);
-        var storedToken = tokenRepository.findByToken(token).orElse(null);
-        if (storedToken != null) {
-            storedToken.setExpired(true);
-            storedToken.setRevoked(true);
-            tokenRepository.save(storedToken);
-        }
+
+        Token logoutToken = Token
+                .builder()
+                .token(token)
+                .tokenType(TokenType.BEARER)
+                .expired(true)
+                .revoked(true)
+                .build();
+        tokenRepository.save(logoutToken);
     }
 }

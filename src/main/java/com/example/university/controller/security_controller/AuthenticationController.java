@@ -1,7 +1,5 @@
 package com.example.university.controller.security_controller;
 
-import com.example.university.dto.AuthenticationRequest;
-import com.example.university.dto.AuthenticationResponse;
 import com.example.university.dto.RegisterRequest;
 import com.example.university.service.security_service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +13,12 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
+
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public AuthenticationResponse register(
+    public void register(
             @RequestBody RegisterRequest request) {
-        return authenticationService.register(request);
+        authenticationService.register(request);
     }
 
 

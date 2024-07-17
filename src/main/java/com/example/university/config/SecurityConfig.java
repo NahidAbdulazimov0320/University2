@@ -1,10 +1,14 @@
 package com.example.university.config;
 
 import com.example.university.enums.Role;
+import com.example.university.service.security_service.JwtService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
@@ -25,12 +29,25 @@ public class SecurityConfig {
             "/v3/api-docs",
             "/webjars/**",
             "/api/v1/auth/sign-up",
-            "/api/v1/auth/sign-in"
+            "/login"
     };
 
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
-    private final CustomAuthenticationFilter customAuthenticationFilter;
+    private final ObjectMapper objectMapper;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final JwtService jwtService;
+
+    @Bean
+    public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
+        return new CustomAuthenticationFilter(objectMapper, authenticationManager(), jwtService);
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
@@ -46,7 +63,7 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilter(customAuthenticationFilter)
+                .addFilter(customAuthenticationFilter())
                 .addFilterBefore(jwtAuthenticationFilter, CustomAuthenticationFilter.class)
                 .logout(logout -> {
                     logout.logoutUrl("/api/v1/auth/logout");

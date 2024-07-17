@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/enrollments")
 public class EnrollmentController extends MainController<EnrollmentDTO, Long, Enrollment> {
-
     public EnrollmentController(MainService<EnrollmentDTO, Long, Enrollment> service) {
         super(service);
     }

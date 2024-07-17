@@ -1,6 +1,5 @@
 package com.example.university.dto;
 
-
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

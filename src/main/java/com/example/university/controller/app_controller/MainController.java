@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Transactional
 @RequiredArgsConstructor
@@ -20,25 +19,17 @@ public abstract class MainController<D, ID extends Serializable, E extends MainE
     private final MainService<D, ID, E> service;
 
     @GetMapping
-    public Page<D> getAll(Pageable pageable) {
-        return service.getAll(pageable);
-    }
+    public Page<D> getAll(Pageable pageable) {return service.getAll(pageable);}
 
     @GetMapping("/{id}")
-    public D getById(@PathVariable ID id) {
-        return service.getById(id);
-    }
+    public D getById(@PathVariable ID id) {return service.getById(id);}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public D create(@RequestBody @Valid D element) {
-        return service.create(element);
-    }
+    public D create(@RequestBody @Valid D element) {return service.create(element);}
 
     @PutMapping("/{id}")
-    public D updateById(@PathVariable ID id, @RequestBody @Valid D element) {
-        return service.updateById(id, element);
-    }
+    public D updateById(@PathVariable ID id, @RequestBody @Valid D element) {return service.updateById(id, element);}
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
