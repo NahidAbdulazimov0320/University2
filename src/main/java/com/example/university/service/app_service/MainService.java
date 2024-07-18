@@ -3,71 +3,67 @@ package com.example.university.service.app_service;
 import com.example.university.entity.main_entities.MainEntity;
 import com.example.university.exceptions.NoDataFound;
 import com.example.university.mappers.MainMapper;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 
+@CacheConfig(cacheNames = {"cacheOne", "cacheTwo"})
 @RequiredArgsConstructor
 public abstract class MainService<D, ID extends Serializable, O extends MainEntity> {
 
+    private static final Logger log = LoggerFactory.getLogger(MainService.class);
     private final JpaRepositoryImplementation<O, ID> repository;
     private final MainMapper<D, O> mapper;
 
-    private Cache<String, List<O>> cache;
+    /*
+    MANUAL CACHING BELOW
+    private LoadingCache<Object,Object> cache -> synchronous caching
+    private AsyncLoadingCache<Object, Object> cache; -> asynchronous caching
+    get method on cache is more preferable than getIfPresent since it supports atomicity!
+    */
 
-    public Page<D> getAll(Pageable pageable){
-        if (cache.getIfPresent("cache") != null) {
-            List<D> cachedData = Objects.requireNonNull(cache.getIfPresent("cache")).stream()
-                    .map(mapper::toDto)
-                    .toList();
-            return new PageImpl<>(cachedData, pageable, cachedData.size());
-        }
+    @Cacheable(value = "cacheOne", condition = "#pageable != null")
+    public Page<D> getAll(Pageable pageable) {
+        log.info("Reading from DB for getAll");
         Page<O> all = repository.findAll(pageable);
-        List<O> entities = all.getContent();
-        cache.put("cache", entities);
         return all.map(mapper::toDto);
     }
 
+    @Cacheable(value = "cacheOne", key = "#id", unless = "#result == null")
     public D getById(ID id) {
+        log.info("Reading from DB for ID: {}", id);
         return repository
                 .findById(id)
                 .map(mapper::toDto)
                 .orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now()));
     }
 
+    @CacheEvict(value = "cacheOne", allEntries = true)
     public D create(D element) {
+        log.info("Creating new element, clearing cache");
         return mapper.toDto(repository.save(mapper.toEntity(element)));
     }
 
+    @CacheEvict(value = "cacheOne", key = "#id")
     public D updateById(ID id, D element) {
         return repository
                 .findById(id)
                 .map(object -> repository.save(mapper.toEntity(object, element)))
-                .map(mapper::toDto).orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now()));
+                .map(mapper::toDto)
+                .orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now()));
     }
 
+    @CacheEvict(value = "cacheOne", key = "#id")
     public void deleteById(ID id) {
         repository.delete(repository.findById(id).orElseThrow(() -> new NoDataFound("No record found with id: " + id, LocalDateTime.now())));
     }
-
-
-    @PostConstruct
-    public void init() {
-        cache = Caffeine
-                .newBuilder()
-                .maximumSize(100)
-                .build();
-
-    }
-
 }

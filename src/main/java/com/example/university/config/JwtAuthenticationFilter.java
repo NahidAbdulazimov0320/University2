@@ -1,6 +1,5 @@
 package com.example.university.config;
 
-import com.example.university.entity.auth_entities.Token;
 import com.example.university.repository.TokenRepository;
 import com.example.university.service.security_service.JwtService;
 import com.example.university.service.security_service.UserDetailsService;
@@ -46,14 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwtService.extractAllClaims(jwt);
         userEmail = jwtService.extractUsername();
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            Token token = tokenRepository.findByToken(jwt).orElse(null);
-            if (token != null) {
-                if (token.isExpired() || token.isRevoked()) {
-                    logger.info("User logged out! Signing in required again!");
-                    filterChain.doFilter(request, response);
-                    return;
-                }
-            }
+
             UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     userDetails,
